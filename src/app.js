@@ -16,7 +16,9 @@ app.get('/strings/lower/:string', (req, res) => {
 });
 
 app.get('/strings/first-characters/:string', (req, res) => {
-  res.status(200).json({ result: firstCharacters(req.params.string, req.query.length) });
+  const length = req.query.length || 1;
+
+  res.status(200).json({ result: firstCharacters(req.params.string, length) });
 });
 
 module.exports = app;

@@ -18,7 +18,7 @@ const firstCharacter = string => {
   return string.charAt(0);
 };
 
-const firstCharacters = (string, n = 1) => {
+const firstCharacters = (string, n) => {
   const charList = [];
 
   for (let i = 0; i < n; i++) {
