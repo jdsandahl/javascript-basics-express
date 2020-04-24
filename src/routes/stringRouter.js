@@ -1,5 +1,6 @@
 const express = require('express');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('../lib/strings');
+
 const stringRouter = express.Router();
 
 stringRouter.get('/hello/:string', (req, res) => {
