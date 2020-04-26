@@ -1,5 +1,5 @@
 const express = require('express');
-const { add, subtract, multiply } = require('../lib/numbers');
+const { add, subtract, multiply, divide } = require('../lib/numbers');
 
 const numbersRouter = express.Router();
 
@@ -22,12 +22,24 @@ numbersRouter.get('/subtract/:firstNum/from/:secondNum', (req, res) => {
 });
 
 numbersRouter.post('/multiply', (req, res) => {
-  if (!req.body.a || !req.body.b) {
+  if (req.body.a === undefined || req.body.b === undefined) {
     res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
   } else if (Number.isNaN(parseInt(req.body.a)) || Number.isNaN(parseInt(req.body.b))) {
     res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' });
   } else {
     res.status(200).json({ result: multiply(req.body.a, req.body.b) });
+  }
+});
+
+numbersRouter.post('/divide', (req, res) => {
+  if (req.body.b === 0) {
+    res.status(400).json({ error: 'Unable to divide by 0.' });
+  } else if (req.body.a === undefined || req.body.b === undefined) {
+    res.status(400).json({error: 'Parameters "a" and "b" are required.' });
+  } else if (Number.isNaN(parseInt(req.body.a)) || Number.isNaN(parseInt(req.body.b))) {
+    res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' });
+  } else {
+    res.status(200).json({ result: divide(req.body.a, req.body.b) });
   }
 });
 
