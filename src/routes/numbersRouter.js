@@ -1,9 +1,9 @@
 const express = require('express');
 const { add, subtract, multiply, divide, remainder } = require('../lib/numbers');
 
-const numbersRouter = express.Router();
+const router = express.Router();
 
-numbersRouter.get('/add/:firstNum/and/:secondNum', (req, res) => {
+router.get('/add/:firstNum/and/:secondNum', (req, res) => {
   const firstNum = parseInt(req.params.firstNum);
   const secondNum = parseInt(req.params.secondNum);
 
@@ -12,7 +12,7 @@ numbersRouter.get('/add/:firstNum/and/:secondNum', (req, res) => {
     : res.status(200).json({ result: add(firstNum, secondNum) });
 });
 
-numbersRouter.get('/subtract/:firstNum/from/:secondNum', (req, res) => {
+router.get('/subtract/:firstNum/from/:secondNum', (req, res) => {
   const firstNum = parseInt(req.params.firstNum);
   const secondNum = parseInt(req.params.secondNum);
 
@@ -21,7 +21,7 @@ numbersRouter.get('/subtract/:firstNum/from/:secondNum', (req, res) => {
     : res.status(200).json({ result: subtract(secondNum, firstNum) });
 });
 
-numbersRouter.post('/multiply', (req, res) => {
+router.post('/multiply', (req, res) => {
   if (req.body.a === undefined || req.body.b === undefined) {
     res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
   } else if (Number.isNaN(parseInt(req.body.a)) || Number.isNaN(parseInt(req.body.b))) {
@@ -31,7 +31,7 @@ numbersRouter.post('/multiply', (req, res) => {
   }
 });
 
-numbersRouter.post('/divide', (req, res) => {
+router.post('/divide', (req, res) => {
   if (req.body.b === 0) {
     res.status(400).json({ error: 'Unable to divide by 0.' });
   } else if (req.body.a === undefined || req.body.b === undefined) {
@@ -43,7 +43,7 @@ numbersRouter.post('/divide', (req, res) => {
   }
 });
 
-numbersRouter.post('/remainder', (req, res) => {
+router.post('/remainder', (req, res) => {
   if (req.body.b === 0) {
     res.status(400).json({ error: 'Unable to divide by 0.' });
   } else if (req.body.a === undefined || req.body.b === undefined) {
@@ -55,4 +55,4 @@ numbersRouter.post('/remainder', (req, res) => {
   }
 });
 
-module.exports = numbersRouter;
+module.exports = router;

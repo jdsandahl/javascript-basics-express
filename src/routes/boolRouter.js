@@ -1,17 +1,17 @@
 const express = require('express');
 const { negate, truthiness, isOdd, startsWith } = require('../lib/booleans');
 
-const boolRouter = express.Router();
+const router = express.Router();
 
-boolRouter.post('/negate', (req, res) => {
+router.post('/negate', (req, res) => {
   res.status(200).json({ result: negate(req.body.value) });
 });
 
-boolRouter.post('/truthiness', (req, res) => {
+router.post('/truthiness', (req, res) => {
   res.status(200).json({ result: truthiness(req.body.value) });
 });
 
-boolRouter.get('/is-odd/:number', (req, res) => {
+router.get('/is-odd/:number', (req, res) => {
   const number = parseInt(req.params.number);
 
   return Number.isNaN(number)
@@ -19,7 +19,7 @@ boolRouter.get('/is-odd/:number', (req, res) => {
     : res.status(200).json({ result: isOdd(number) });
 });
 
-boolRouter.get('/:string/starts-with/:letter', (req, res) => {
+router.get('/:string/starts-with/:letter', (req, res) => {
   const { string } = req.params;
   const { letter } = req.params;
 
@@ -28,4 +28,4 @@ boolRouter.get('/:string/starts-with/:letter', (req, res) => {
     : res.status(200).json({ result: startsWith(letter, string) });
 });
 
-module.exports = boolRouter;
+module.exports = router;

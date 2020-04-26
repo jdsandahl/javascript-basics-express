@@ -1,24 +1,15 @@
 const express = require('express');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('../lib/strings');
+const stringController = require('../controllers/stringsController');
 
-const stringRouter = express.Router();
+const router = express.Router();
 
-stringRouter.get('/hello/:string', (req, res) => {
-  res.status(200).json({ result: sayHello(req.params.string) });
-});
+router.get('/hello/:string', stringController.strings_sayhello);
 
-stringRouter.get('/upper/:string', (req, res) => {
-  res.status(200).json({ result: uppercase(req.params.string) });
-});
+router.get('/upper/:string', stringController.strings_uppercase); 
 
-stringRouter.get('/lower/:string', (req, res) => {
-  res.status(200).json({ result: lowercase(req.params.string) });
-});
+router.get('/lower/:string', stringController.strings_lowercase);
 
-stringRouter.get('/first-characters/:string', (req, res) => {
-  const length = req.query.length || 1;
+router.get('/first-characters/:string', stringController.strings_firstCharacters);
 
-  res.status(200).json({ result: firstCharacters(req.params.string, length) });
-});
-
-module.exports = stringRouter;
+module.exports = router;
