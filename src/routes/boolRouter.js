@@ -1,31 +1,14 @@
 const express = require('express');
-const { negate, truthiness, isOdd, startsWith } = require('../lib/booleans');
+const booleanController = require('../controllers/boolController');
 
 const router = express.Router();
 
-router.post('/negate', (req, res) => {
-  res.status(200).json({ result: negate(req.body.value) });
-});
+router.post('/negate', booleanController.bool_negate);
 
-router.post('/truthiness', (req, res) => {
-  res.status(200).json({ result: truthiness(req.body.value) });
-});
+router.post('/truthiness', booleanController.bool_truthiness);
 
-router.get('/is-odd/:number', (req, res) => {
-  const number = parseInt(req.params.number);
+router.get('/is-odd/:number', booleanController.bool_isOdd);
 
-  return Number.isNaN(number)
-    ? res.status(400).json({ error: 'Parameter must be a number.' })
-    : res.status(200).json({ result: isOdd(number) });
-});
-
-router.get('/:string/starts-with/:letter', (req, res) => {
-  const { string } = req.params;
-  const { letter } = req.params;
-
-  return letter.length > 1
-    ? res.status(400).json({ error: 'Parameter "character" must be a single character.' })
-    : res.status(200).json({ result: startsWith(letter, string) });
-});
+router.get('/:string/starts-with/:letter', booleanController.bool_startsWith); 
 
 module.exports = router;
