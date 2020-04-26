@@ -1,5 +1,4 @@
 const express = require('express');
-const { sayHello, uppercase, lowercase, firstCharacters } = require('../lib/strings');
 const stringController = require('../controllers/stringsController');
 
 const router = express.Router();
