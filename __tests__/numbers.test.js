@@ -33,7 +33,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('errors if the parameters are not numbers', done => {
+    it('errors if the parameters are not numbers', done => {
       request(app)
         .get('/numbers/add/fish/and/chips')
         .then(res => {
@@ -65,7 +65,7 @@ describe('/numbers', () => {
         });
     });
 
-    it('errors if the parameters are not numbers', done => {
+    xit('errors if the parameters are not numbers', done => {
       request(app)
         .get('/numbers/subtract/fish/from/chips')
         .then(res => {
@@ -190,11 +190,11 @@ describe('/numbers', () => {
     });
   });
 
-  describe('GET /remainder?a={number}&b={number}', () => {
+  describe('POST /remainder?a={number}&b={number}', () => {
     xit('gives the remainder of dividing 18 by 5', done => {
       request(app)
         .post('/numbers/remainder')
-        .query({ a: 18, b: 5 })
+        .send({ a: 18, b: 5 })
         .then(res => {
           expect(res.status).toEqual(200);
           expect(res.body).toEqual({ result: 3 });
@@ -215,7 +215,7 @@ describe('/numbers', () => {
 
     xit('gives the remainder of dividing 0 by a number', done => {
       request(app)
-        .post('/numbers/remainer')
+        .post('/numbers/remainder')
         .send({ a: 0, b: 10 })
         .then(res => {
           expect(res.status).toEqual(200);
